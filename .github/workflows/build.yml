@@ -16,7 +16,7 @@ jobs:
       run: |
         git clone https://github.com C:\vcpkg
         C:\vcpkg\bootstrap-vcpkg.bat
-        C:\vcpkg\vcpkg install boost-system:x64-windows boost-filesystem:x64-windows boost-iostreams:x64-windows boost-asio:x64-windows boost-chrono:x64-windows boost-regex:x64-windows luajit:x64-windows pugixml:x64-windows gmp:x64-windows libmariadb:x64-windows cryptopp:x64-windows
+        C:\vcpkg\vcpkg install boost-system:x64-windows boost-filesystem:x64-windows boost-iostreams:x64-windows boost-asio:x64-windows boost-chrono:x64-windows boost-regex:x64-windows luajit:x64-windows pugixml:x64-windows gmp:x64-windows libmariadb:x64-windows cryptopp:x64-windows fmt:x64-windows
         
     - name: Configure CMake
       run: |
