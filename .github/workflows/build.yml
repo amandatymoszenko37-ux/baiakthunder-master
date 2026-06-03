@@ -37,7 +37,7 @@ jobs:
         git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
         C:\vcpkg\bootstrap-vcpkg.bat
         # Install common TFS dependencies
-        C:\vcpkg\vcpkg install lua:x64-windows pugixml:x64-windows gmp:x64-windows mariadb:x64-windows
+        C:\vcpkg\vcpkg install lua:x64-windows pugixml:x64-windows gmp:x64-windows libmariadb:x64-windows
         
     - name: Configure CMake
       run: |
