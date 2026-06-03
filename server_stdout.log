@@ -1,0 +1,26 @@
+Forgotten Highexp - Version TFS 1.5 Downgraded by Nekiro. Edited by Marko999x and Pox
+
+Compiled with Microsoft Visual C++ version 1944
+Compiled on Jun  1 2026 03:26:05 for platform x64
+Linked with LuaJIT 2.1.ROLLING for Lua support
+
+A server developed by Administrator
+Downgraded and further developed by Nekiro
+Visit our forum for updates, support, and resources: http://otland.net/.
+
+>> Loading config
+>> Establishing database connection... MySQL 6.1.6
+>> Running database manager
+>> Loading vocations
+>> Loading items... OTB v3.20.20
+[Warning - Items::parseItemNode] Unknown key value: reflectpercentphysical
+[Warning - Items::parseItemNode] Unknown key value: reflectpercentphysical
+>> Loading script systems
+>> Loading lua libs
+[Warning - Events::load] Unknown player method: onSay
+>> Loading lua scripts
+>> Loading monsters
+>> Loading lua monsters
+>> Loading outfits
+>> Checking world type... PVP
+>> Loading map
