@@ -169,10 +169,10 @@ void ServicePort::open(uint16_t port)
 	try {
 		if (g_config.getBoolean(ConfigManager::BIND_ONLY_GLOBAL_ADDRESS)) {
 			acceptor.reset(new boost::asio::ip::tcp::acceptor(io_service, boost::asio::ip::tcp::endpoint(
-			            boost::asio::ip::address(boost::asio::ip::make_address_v4(g_config.getString(ConfigManager::IP_STRING))), serverPort)));
+			            boost::asio::ip::make_address_v4(g_config.getString(ConfigManager::IP_STRING)), serverPort)));
 		} else {
 			acceptor.reset(new boost::asio::ip::tcp::acceptor(io_service, boost::asio::ip::tcp::endpoint(
-			            boost::asio::ip::address(boost::asio::ip::make_address_v4(INADDR_ANY)), serverPort)));
+			            boost::asio::ip::make_address_v4(INADDR_ANY), serverPort)));
 		}
 
 		acceptor->set_option(boost::asio::ip::tcp::no_delay(true));
