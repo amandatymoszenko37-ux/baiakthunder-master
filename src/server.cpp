@@ -63,7 +63,7 @@ void ServiceManager::stop()
 
 	acceptors.clear();
 
-	death_timer.expires_from_now(std::chrono::seconds(3));
+	death_timer.expires_after(std::chrono::seconds(3));
 	death_timer.async_wait(std::bind(&ServiceManager::die, this));
 }
 
@@ -172,7 +172,7 @@ void ServicePort::open(uint16_t port)
 			            boost::asio::ip::address(boost::asio::ip::make_address_v4(g_config.getString(ConfigManager::IP_STRING))), serverPort)));
 		} else {
 			acceptor.reset(new boost::asio::ip::tcp::acceptor(io_service, boost::asio::ip::tcp::endpoint(
-			            boost::asio::ip::address(boost::asio::ip::address_v4(INADDR_ANY)), serverPort)));
+			            boost::asio::ip::address(boost::asio::ip::make_address_v4(INADDR_ANY)), serverPort)));
 		}
 
 		acceptor->set_option(boost::asio::ip::tcp::no_delay(true));
