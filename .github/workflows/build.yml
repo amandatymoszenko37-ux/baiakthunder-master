@@ -5,29 +5,31 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
+    
     - name: Setup MSVC
       uses: microsoft/setup-msbuild@v2
+      
     - name: Install CMake
       uses: jwlawson/actions-setup-cmake@v2
-    - name: Install Boost C++ libraries
-      uses: MarkusKoba/setup-boost@v1.5.1
-      with:
-        boost-version: '1.81.0'
-    - name: Setup vcpkg
+      
+    - name: Setup vcpkg and Install All Dependencies
       run: |
         git clone https://github.com C:\vcpkg
         C:\vcpkg\bootstrap-vcpkg.bat
-        C:\vcpkg\vcpkg install luajit:x64-windows pugixml:x64-windows gmp:x64-windows libmariadb:x64-windows
+        C:\vcpkg\vcpkg install boost-system:x64-windows boost-filesystem:x64-windows boost-iostreams:x64-windows boost-asio:x64-windows boost-chrono:x64-windows boost-regex:x64-windows luajit:x64-windows pugixml:x64-windows gmp:x64-windows libmariadb:x64-windows
+        
     - name: Configure CMake
       run: |
         mkdir build
         cd build
         cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
-    - name: Build
+        
+    - name: Build Server
       run: |
         cd build
         cmake --build . --config Release
-    - name: Upload Artifact
+        
+    - name: Upload Finished Executable
       uses: actions/upload-artifact@v4
       with:
         name: updated-server
