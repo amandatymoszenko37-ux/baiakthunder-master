@@ -48,7 +48,11 @@ jobs:
 
     - name: Install Dependencies via vcpkg.json
       run: |
-        & "${{ github.workspace }}\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}" --no-registry-baseline
+        cd ${{ github.workspace }}/vcpkg
+        $vcpkg_commit = git rev-parse HEAD
+        cd ${{ github.workspace }}
+        (Get-Content vcpkg.json) -replace '"builtin-baseline":\s*"[^"]*"', ('"builtin-baseline": "' + $vcpkg_commit + '"') | Set-Content vcpkg.json
+        & "${{ github.workspace }}\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}"
       shell: powershell
         
     - name: Configure CMake
