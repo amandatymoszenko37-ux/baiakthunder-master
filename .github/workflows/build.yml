@@ -25,10 +25,10 @@ jobs:
         cmakeVersion: '3.28.1'
 
     - name: Install Dependencies Directly
+      shell: cmd
       run: |
-        & "C:\vcpkg\vcpkg.exe" install boost cryptopp gmp libmariadb luajit pugixml --triplet=x64-windows
-        & "C:\vcpkg\vcpkg.exe" install fmt:x64-windows --version=10.2.1 2>$null || & "C:\vcpkg\vcpkg.exe" install fmt --triplet=x64-windows
-      shell: powershell
+        "C:\vcpkg\vcpkg.exe" install boost cryptopp gmp libmariadb luajit pugixml --triplet=x64-windows
+        "C:\vcpkg\vcpkg.exe" install fmt:x64-windows --version=10.2.1 2>nul || "C:\vcpkg\vcpkg.exe" install fmt --triplet=x64-windows
 
     - name: Configure CMake
       run: |
