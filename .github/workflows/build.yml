@@ -28,31 +28,28 @@ jobs:
       with:
         cmakeVersion: '3.28.1'
 
-    - name: Cache vcpkg & Dependencies
+    - name: Create Cache Directory
+      run: |
+        New-Item -ItemType Directory -Force -Path "${{ github.workspace }}/vcpkg_cache"
+      shell: powershell
+
+    - name: Cache vcpkg Dependencies
       uses: actions/cache@v4
       with:
-        path: |
-          ${{ github.workspace }}/vcpkg
-          ${{ github.workspace }}/vcpkg_cache
-        key: ${{ runner.os }}-vcpkg-manual-${{ hashFiles('vcpkg.json') }}
+        path: ${{ github.workspace }}/vcpkg_cache
+        key: ${{ runner.os }}-vcpkg-global-${{ hashFiles('vcpkg.json') }}
         restore-keys: |
-          ${{ runner.os }}-vcpkg-manual-
+          ${{ runner.os }}-vcpkg-global-
 
     - name: Setup vcpkg and Install Dependencies
       run: |
-        if (-not (Test-Path "${{ github.workspace }}/vcpkg/vcpkg.exe")) {
-          git clone https://github.com/Microsoft/vcpkg.git ${{ github.workspace }}/vcpkg
-          cd ${{ github.workspace }}/vcpkg
-          git checkout 2024.04.26
-          .\bootstrap-vcpkg.bat
-        }
         cd ${{ github.workspace }}
-        & "${{ github.workspace }}\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}"
+        & "C:\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}"
       shell: powershell
 
     - name: Configure CMake
       run: |
-        cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE="C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
       shell: powershell
 
     - name: Build Server
