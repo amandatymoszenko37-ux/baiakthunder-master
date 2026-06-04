@@ -20,9 +20,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Install CMake
-      uses: jasonallen/actions-setup-cmake@v2
-      with:
-        cmake-version: '3.28.x'
+      uses: lukka/get-cmake@v3.28
 
     - name: Setup vcpkg and Install Dependencies
       uses: lukka/run-vcpkg@v11
