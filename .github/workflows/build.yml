@@ -23,7 +23,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: |
-          C:\vcpkg
+          vcpkg
           vcpkg-downloads
         key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
         restore-keys: |
@@ -40,19 +40,19 @@ jobs:
     - name: Setup vcpkg
       shell: cmd
       run: |
-        if not exist C:\vcpkg git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
-        cd C:\vcpkg && git fetch --unshallow || git fetch
-        C:\vcpkg\bootstrap-vcpkg.bat
+        if not exist vcpkg git clone https://github.com/Microsoft/vcpkg.git vcpkg
+        cd vcpkg && git fetch --unshallow || git fetch
+        vcpkg\bootstrap-vcpkg.bat
 
     - name: Install Dependencies via vcpkg.json
       run: |
-        C:\vcpkg\vcpkg install --triplet x64-windows
+        vcpkg\vcpkg install --triplet x64-windows
         
     - name: Configure CMake
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+        cmake .. -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake
         
     - name: Build Server
       run: |
