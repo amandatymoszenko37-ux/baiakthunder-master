@@ -35,6 +35,8 @@ jobs:
           ${{ runner.os }}-vcpkg-manual-
 
     - name: Setup vcpkg and Install Dependencies
+      env:
+        VCPKG_FEATURE_FLAGS: versions
       run: |
         if (-not (Test-Path "${{ github.workspace }}/vcpkg/vcpkg.exe")) {
           git clone https://github.com/Microsoft/vcpkg.git ${{ github.workspace }}/vcpkg
@@ -43,7 +45,7 @@ jobs:
           .\bootstrap-vcpkg.bat
         }
         cd ${{ github.workspace }}
-        & "${{ github.workspace }}\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}" --x-feature-versions
+        & "${{ github.workspace }}\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}"
       shell: powershell
 
     - name: Configure CMake
