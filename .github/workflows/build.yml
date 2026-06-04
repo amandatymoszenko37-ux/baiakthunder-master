@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: windows-latest
 
+    env:
+      VCPKG_ROOT: C:\vcpkg
+      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg_cache
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
