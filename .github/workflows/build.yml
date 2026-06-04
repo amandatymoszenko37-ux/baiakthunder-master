@@ -27,8 +27,7 @@ jobs:
     - name: Install Dependencies Directly
       shell: cmd
       run: |
-        "C:\vcpkg\vcpkg.exe" install boost cryptopp gmp libmariadb luajit pugixml --triplet=x64-windows
-        "C:\vcpkg\vcpkg.exe" install fmt:x64-windows --version=10.2.1 2>nul || "C:\vcpkg\vcpkg.exe" install fmt --triplet=x64-windows
+        "C:\vcpkg\vcpkg.exe" install boost:x64-windows cryptopp:x64-windows gmp:x64-windows libmariadb:x64-windows luajit:x64-windows pugixml:x64-windows fmt:x64-windows
 
     - name: Configure CMake
       run: |
