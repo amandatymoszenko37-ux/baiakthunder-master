@@ -24,12 +24,24 @@ jobs:
       with:
         cmakeVersion: '3.28.1'
 
+    - name: Cache vcpkg & Dependencies
+      uses: actions/cache@v4
+      with:
+        path: |
+          ${{ github.workspace }}/vcpkg
+          ${{ github.workspace }}/vcpkg_cache
+        key: ${{ runner.os }}-vcpkg-manual-${{ hashFiles('vcpkg.json') }}
+        restore-keys: |
+          ${{ runner.os }}-vcpkg-manual-
+
     - name: Setup vcpkg and Install Dependencies
       run: |
-        git clone https://github.com/Microsoft/vcpkg.git ${{ github.workspace }}/vcpkg
-        cd ${{ github.workspace }}/vcpkg
-        git checkout 3426db05b996481ca31e95fff3734cf23e0f51bc
-        .\bootstrap-vcpkg.bat
+        if (-not (Test-Path "${{ github.workspace }}/vcpkg/vcpkg.exe")) {
+          git clone https://github.com/Microsoft/vcpkg.git ${{ github.workspace }}/vcpkg
+          cd ${{ github.workspace }}/vcpkg
+          git checkout 3426db05b996481ca31e95fff3734cf23e0f51bc
+          .\bootstrap-vcpkg.bat
+        }
         cd ${{ github.workspace }}
         $vcpkg_commit = cd vcpkg; git rev-parse HEAD; cd ..
         (Get-Content vcpkg.json) -replace '"builtin-baseline":\s*"[^"]*"', ('"builtin-baseline": "' + $vcpkg_commit + '"') | Set-Content vcpkg.json
