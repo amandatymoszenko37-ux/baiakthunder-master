@@ -19,6 +19,9 @@
 
 #define FS_OTPCH_H_F00C737DA6CA4C8D90F57430C614367F
 
+// Define FMT_ENFORCE_COMPILE_STRING before any fmt includes
+#define FMT_ENFORCE_COMPILE_STRING
+
 // Definitions should be global.
 #include "definitions.h"
 

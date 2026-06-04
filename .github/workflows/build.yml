@@ -24,10 +24,12 @@ jobs:
       with:
         cmakeVersion: '3.28.1'
 
-    - name: Install Dependencies Directly
-      shell: cmd
-      run: |
-        "C:\vcpkg\vcpkg.exe" install boost:x64-windows cryptopp:x64-windows gmp:x64-windows libmariadb:x64-windows luajit:x64-windows pugixml:x64-windows fmt:x64-windows
+    - name: Install Dependencies
+      uses: lukka/run-vcpkg@v11
+      with:
+        vcpkgDirectory: C:/vcpkg
+        vcpkgJsonGlob: 'vcpkg.json'
+        runVcpkgInstall: true
 
     - name: Configure CMake
       run: |
