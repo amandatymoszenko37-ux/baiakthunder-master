@@ -10,10 +10,6 @@ jobs:
   build:
     runs-on: windows-latest
 
-    env:
-      VCPKG_ROOT: C:\vcpkg
-      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg_cache
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -28,28 +24,12 @@ jobs:
       with:
         cmakeVersion: '3.28.1'
 
-    - name: Create Cache Directory
-      run: |
-        New-Item -ItemType Directory -Force -Path "${{ github.workspace }}/vcpkg_cache"
-      shell: powershell
-
-    - name: Cache vcpkg Dependencies
-      uses: actions/cache@v4
-      with:
-        path: ${{ github.workspace }}/vcpkg_cache
-        key: ${{ runner.os }}-vcpkg-global-${{ hashFiles('vcpkg.json') }}
-        restore-keys: |
-          ${{ runner.os }}-vcpkg-global-
-
     - name: Setup vcpkg and Install Dependencies
-      run: |
-        git config --global --add safe.directory C:/vcpkg
-        cd C:\vcpkg
-        git fetch --unshallow 2>$null || git fetch
-        git pull origin master
-        cd ${{ github.workspace }}
-        & "C:\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}"
-      shell: powershell
+      uses: lukka/run-vcpkg@v11
+      with:
+        vcpkgDirectory: C:/vcpkg
+        vcpkgJsonGlob: 'vcpkg.json'
+        runVcpkgInstall: true
 
     - name: Configure CMake
       run: |
