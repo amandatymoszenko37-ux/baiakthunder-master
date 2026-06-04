@@ -20,7 +20,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Install CMake
-      uses: lukka/get-cmake@v1
+      uses: lukka/get-cmake@latest
       with:
         cmakeVersion: '3.28.1'
 
