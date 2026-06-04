@@ -43,6 +43,7 @@ jobs:
 
     - name: Setup vcpkg and Install Dependencies
       run: |
+        git config --global --add safe.directory C:/vcpkg
         cd C:\vcpkg
         git fetch --unshallow 2>$null || git fetch
         git pull origin master
