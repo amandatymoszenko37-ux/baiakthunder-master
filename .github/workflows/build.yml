@@ -40,11 +40,8 @@ jobs:
     - name: Setup vcpkg (full clone)
       shell: cmd
       run: |
-        if not exist C:\vcpkg (
-            git clone https://github.com C:\vcpkg
-        ) else (
-            cd C:\vcpkg && git pull
-        )
+        if exist C:\vcpkg rmdir /s /q C:\vcpkg
+        git clone https://github.com C:\vcpkg
         if exist C:\vcpkg\bootstrap-vcpkg.bat call C:\vcpkg\bootstrap-vcpkg.bat
 
     - name: Install Dependencies via vcpkg.json
