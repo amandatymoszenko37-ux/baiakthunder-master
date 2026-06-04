@@ -43,7 +43,7 @@ jobs:
           .\bootstrap-vcpkg.bat
         }
         cd ${{ github.workspace }}
-        & "${{ github.workspace }}\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}"
+        & "${{ github.workspace }}\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}" --x-feature-versions
       shell: powershell
 
     - name: Configure CMake
