@@ -25,12 +25,16 @@ jobs:
         cmakeVersion: '3.28.1'
 
     - name: Setup vcpkg and Install Dependencies
-      uses: lukka/run-vcpkg@v11
-      with:
-        vcpkgDirectory: ${{ github.workspace }}/vcpkg
-        vcpkgGitCommitId: 3426db05b996481ca31e95fff3734cf23e0f51bc
-        vcpkgJsonGlob: 'vcpkg.json'
-        runVcpkgInstall: true
+      run: |
+        git clone https://github.com/Microsoft/vcpkg.git ${{ github.workspace }}/vcpkg
+        cd ${{ github.workspace }}/vcpkg
+        git checkout 3426db05b996481ca31e95fff3734cf23e0f51bc
+        .\bootstrap-vcpkg.bat
+        cd ${{ github.workspace }}
+        $vcpkg_commit = cd vcpkg; git rev-parse HEAD; cd ..
+        (Get-Content vcpkg.json) -replace '"builtin-baseline":\s*"[^"]*"', ('"builtin-baseline": "' + $vcpkg_commit + '"') | Set-Content vcpkg.json
+        & "${{ github.workspace }}\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}"
+      shell: powershell
 
     - name: Configure CMake
       run: |
