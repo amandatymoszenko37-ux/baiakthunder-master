@@ -498,9 +498,6 @@
 	<spawn centerx="656" centery="1179" centerz="5" radius="1">
 		<monster name="Frost Dragon" x="0" y="0" z="5" spawntime="60" />
 	</spawn>
-	<spawn centerx="625" centery="1231" centerz="5" radius="1">
-		<npc name="Mad" x="0" y="0" z="5" spawntime="60" />
-	</spawn>
 	<spawn centerx="625" centery="1235" centerz="5" radius="1">
 		<npc name="Riona" x="0" y="0" z="5" spawntime="60" />
 	</spawn>

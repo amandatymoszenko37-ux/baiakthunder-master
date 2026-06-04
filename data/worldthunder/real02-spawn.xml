@@ -3426,12 +3426,16 @@
   <spawn centerx="1062" centery="1190" centerz="7" radius="16">
     <monster name="Snake" x="-15" y="-16" z="7" spawntime="60"/>
     <monster name="Snake" x="14" y="-14" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="16" y="-11" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="13" y="7" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="-7" y="10" z="7" spawntime="60"/>
   </spawn>
   <spawn centerx="1095" centery="1190" centerz="7" radius="16">
     <monster name="Cyclops" x="13" y="-15" z="7" spawntime="60"/>
     <monster name="Snake" x="-9" y="-14" z="7" spawntime="60"/>
     <monster name="Snake" x="-3" y="-7" z="7" spawntime="60"/>
     <monster name="Snake" x="-15" y="-4" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="-3" y="2" z="7" spawntime="60"/>
   </spawn>
   <spawn centerx="541" centery="1191" centerz="7" radius="1">
     <monster name="Defiler" x="0" y="0" z="7" spawntime="60"/>
@@ -3509,9 +3513,15 @@
   <spawn centerx="1000" centery="1217" centerz="7" radius="1"/>
   <spawn centerx="336" centery="1218" centerz="7" radius="1"/>
   <spawn centerx="464" centery="1219" centerz="7" radius="1"/>
-  <spawn centerx="1058" centery="1219" centerz="7" radius="12"/>
+  <spawn centerx="1058" centery="1219" centerz="7" radius="12">
+    <monster name="Giant Spider" x="12" y="-9" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="-7" y="-3" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="0" y="9" z="7" spawntime="60"/>
+  </spawn>
   <spawn centerx="1083" centery="1219" centerz="7" radius="12">
     <monster name="Snake" x="3" y="-12" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="8" y="-7" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="-4" y="3" z="7" spawntime="60"/>
   </spawn>
   <spawn centerx="283" centery="1220" centerz="7" radius="1"/>
   <spawn centerx="308" centery="1220" centerz="7" radius="1"/>
@@ -3571,8 +3581,15 @@
   </spawn>
   <spawn centerx="1055" centery="1244" centerz="7" radius="12">
     <monster name="spider" x="-7" y="-10" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="12" y="-9" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="-9" y="5" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="11" y="10" z="7" spawntime="60"/>
   </spawn>
-  <spawn centerx="1080" centery="1244" centerz="7" radius="12"/>
+  <spawn centerx="1080" centery="1244" centerz="7" radius="12">
+    <monster name="Giant Spider" x="3" y="-10" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="6" y="-2" z="7" spawntime="60"/>
+    <monster name="Giant Spider" x="-9" y="9" z="7" spawntime="60"/>
+  </spawn>
   <spawn centerx="462" centery="1249" centerz="7" radius="1"/>
   <spawn centerx="475" centery="1249" centerz="7" radius="1">
     <monster name="Nightmare" x="0" y="0" z="7" spawntime="60"/>

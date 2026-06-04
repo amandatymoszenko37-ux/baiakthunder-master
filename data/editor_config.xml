@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor_config>
+	<!-- Remere's Map Editor Configuration for Baiak Thunder -->
+	<paths>
+		<data_path>data/</data_path>
+		<monsters_path>data/monster/</monsters_path>
+		<npcs_path>data/npc/</npcs_path>
+		<items_path>data/items/</items_path>
+		<world_path>data/world/</world_path>
+	</paths>
+	<files>
+		<creatures_file>data/creatures.xml</creatures_file>
+		<monsters_file>data/monster/monsters.xml</monsters_file>
+		<items_file>data/items/items.xml</items_file>
+		<items_otb>data/items/items.otb</items_otb>
+		<spawns_file>data/world/real02-spawn.xml</spawns_file>
+		<houses_file>data/world/real02-house.xml</houses_file>
+		<map_file>data/world/real02.otbm</map_file>
+	</files>
+	<client_version>
+		<version>860</version>
+		<dat_signature>1234567890</dat_signature>
+		<spr_signature>1234567890</spr_signature>
+		<pic_signature>1234567890</pic_signature>
+	</client_version>
+</editor_config>

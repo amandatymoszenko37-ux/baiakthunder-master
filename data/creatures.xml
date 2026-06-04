@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures>
+	<!-- This file is used by Remere's Map Editor to load creatures from the server -->
+	<creatures directory="monster/" file="monsters.xml"/>
+	<npcs directory="npc/">
+		<npc file="Alice.xml"/>
+		<npc file="Bianca.xml"/>
+		<npc file="Breno.xml"/>
+		<npc file="Capita Cristina.xml"/>
+		<npc file="Cassino.xml"/>
+		<npc file="Charbel.xml"/>
+		<npc file="Felipe.xml"/>
+		<npc file="Gustavo.xml"/>
+		<npc file="Heitor.xml"/>
+		<npc file="Marcelo.xml"/>
+		<npc file="Padre Marcos.xml"/>
+		<npc file="Raimunda.xml"/>
+		<npc file="Riona.xml"/>
+		<npc file="The Forgotten King.xml"/>
+		<npc file="The Oracle.xml"/>
+		<npc file="Tyoric.xml"/>
+		<npc file="Vanessa Premium.xml"/>
+		<npc file="Vanessa.xml"/>
+		<npc file="task and daily.xml"/>
+		<npc file="teste.xml"/>
+	</npcs>
+</creatures>

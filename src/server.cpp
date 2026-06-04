@@ -172,7 +172,7 @@ void ServicePort::open(uint16_t port)
 			            boost::asio::ip::make_address_v4(g_config.getString(ConfigManager::IP_STRING)), serverPort)));
 		} else {
 			acceptor.reset(new boost::asio::ip::tcp::acceptor(io_service, boost::asio::ip::tcp::endpoint(
-			            boost::asio::ip::make_address_v4(INADDR_ANY), serverPort)));
+			            boost::asio::ip::make_address_v4("0.0.0.0"), serverPort)));
 		}
 
 		acceptor->set_option(boost::asio::ip::tcp::no_delay(true));
