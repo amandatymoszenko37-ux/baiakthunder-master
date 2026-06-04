@@ -44,11 +44,11 @@ jobs:
         cd vcpkg
         git fetch --unshallow || git fetch
         bootstrap-vcpkg.bat
+        echo VCPKG_ROOT=%CD% >> %GITHUB_ENV%
 
     - name: Install Dependencies via vcpkg.json
       run: |
-        cd ${{ github.workspace }}
-        & "${{ env.VCPKG_ROOT }}\vcpkg.exe" install --triplet=x64-windows --x-manifest-root=. --no-registry-baseline
+        & "${{ github.workspace }}\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}" --no-registry-baseline
       shell: powershell
         
     - name: Configure CMake
