@@ -39,6 +39,7 @@ jobs:
         if (-not (Test-Path "${{ github.workspace }}/vcpkg/vcpkg.exe")) {
           git clone https://github.com/Microsoft/vcpkg.git ${{ github.workspace }}/vcpkg
           cd ${{ github.workspace }}/vcpkg
+          git checkout 2024.04.26
           .\bootstrap-vcpkg.bat
         }
         cd ${{ github.workspace }}
