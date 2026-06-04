@@ -1,72 +1,49 @@
 name: Build Baiak Thunder
-on: [push]
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
-    - uses: actions/checkout@v4
-    
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
     - name: Setup MSVC
       uses: microsoft/setup-msbuild@v2
-      
+
     - name: Install CMake
-      uses: jwlawson/actions-setup-cmake@v2
-      
-    - name: Setup vcpkg binary cache
-      uses: actions/github-script@v7
+      uses: jasonallen/actions-setup-cmake@v2
       with:
-        script: |
-          core.exportVariable('VCPKG_BINARY_SOURCES', 'clear;x-gha,readwrite')
-          core.exportVariable('VCPKG_DOWNLOADS', process.env.GITHUB_WORKSPACE + '\\vcpkg-downloads')
+        cmake-version: '3.28.x'
 
-    - name: Cache vcpkg
-      uses: actions/cache@v4
+    - name: Setup vcpkg and Install Dependencies
+      uses: lukka/run-vcpkg@v11
       with:
-        path: |
-          vcpkg
-          vcpkg-downloads
-        key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
-        restore-keys: |
-          ${{ runner.os }}-vcpkg-
+        vcpkgDirectory: ${{ github.workspace }}/vcpkg
+        vcpkgGitCommitId: 3426db05b996481ca31e95fff3734cf23e0f51bc
+        vcpkgJsonGlob: 'vcpkg.json'
+        runVcpkgInstall: true
 
-    - name: Cache CMake build
-      uses: actions/cache@v4
-      with:
-        path: build
-        key: ${{ runner.os }}-build-${{ hashFiles('**/*.cpp', '**/*.h', '**/CMakeLists.txt', 'vcpkg.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-
-
-    - name: Setup vcpkg
-      shell: cmd
-      run: |
-        if not exist vcpkg git clone https://github.com/Microsoft/vcpkg.git vcpkg
-        cd vcpkg
-        git fetch --unshallow || git fetch
-        bootstrap-vcpkg.bat
-        echo VCPKG_ROOT=%CD% >> %GITHUB_ENV%
-
-    - name: Install Dependencies via vcpkg.json
-      run: |
-        cd ${{ github.workspace }}/vcpkg
-        $vcpkg_commit = git rev-parse HEAD
-        cd ${{ github.workspace }}
-        (Get-Content vcpkg.json) -replace '"builtin-baseline":\s*"[^"]*"', ('"builtin-baseline": "' + $vcpkg_commit + '"') | Set-Content vcpkg.json
-        & "${{ github.workspace }}\vcpkg\vcpkg.exe" install --triplet=x64-windows --x-manifest-root="${{ github.workspace }}"
-      shell: powershell
-        
     - name: Configure CMake
       run: |
-        cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake" -DCMAKE_PREFIX_PATH="${{ github.workspace }}/vcpkg_installed/x64-windows" -DCMAKE_EXE_LINKER_FLAGS="/FORCE:MULTIPLE"
+        cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake"
       shell: powershell
-        
+
     - name: Build Server
       run: |
-        cd build
-        cmake --build . --config Release
-        
+        cmake --build build --config Release
+      shell: powershell
+
     - name: Upload Finished Executable
       uses: actions/upload-artifact@v4
       with:
-        name: updated-server
+        name: theforgottenserver-windows
         path: build/Release/theforgottenserver.exe
