@@ -40,13 +40,13 @@ jobs:
     - name: Setup vcpkg
       shell: cmd
       run: |
-        if not exist C:\vcpkg git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
+        if not exist C:\vcpkg git clone --depth=1 https://github.com/Microsoft/vcpkg.git C:\vcpkg
         if exist C:\vcpkg\bootstrap-vcpkg.bat call C:\vcpkg\bootstrap-vcpkg.bat
 
     - name: Install Dependencies via vcpkg.json
       shell: cmd
       run: |
-        C:\vcpkg\vcpkg install --triplet x64-windows --x-manifest-root=%GITHUB_WORKSPACE% --x-install-root=C:\vcpkg\installed
+        C:\vcpkg\vcpkg install --triplet x64-windows --x-manifest-root=%GITHUB_WORKSPACE%
         
     - name: Configure CMake
       shell: cmd
