@@ -23,7 +23,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: |
-          C:\vcpkg
+          vcpkg
           vcpkg-downloads
         key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
         restore-keys: |
@@ -37,24 +37,23 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-build-
 
-    - name: Setup vcpkg (full clone)
+    - name: Setup vcpkg
       shell: cmd
       run: |
-        if exist C:\vcpkg rmdir /s /q C:\vcpkg
-        git clone https://github.com C:\vcpkg
-        if exist C:\vcpkg\bootstrap-vcpkg.bat call C:\vcpkg\bootstrap-vcpkg.bat
+        if not exist vcpkg git clone https://github.com vcpkg
+        if exist vcpkg\bootstrap-vcpkg.bat call vcpkg\bootstrap-vcpkg.bat
 
     - name: Install Dependencies via vcpkg.json
       shell: cmd
       run: |
-        C:\vcpkg\vcpkg install --triplet x64-windows --x-manifest-root=%GITHUB_WORKSPACE%
+        vcpkg\vcpkg install --triplet x64-windows --x-manifest-root=%GITHUB_WORKSPACE%
         
     - name: Configure CMake
       shell: cmd
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+        cmake .. -DCMAKE_TOOLCHAIN_FILE=%GITHUB_WORKSPACE%/vcpkg/scripts/buildsystems/vcpkg.cmake
         
     - name: Build Server
       shell: cmd
