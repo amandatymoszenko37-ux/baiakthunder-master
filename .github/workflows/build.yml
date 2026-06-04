@@ -41,7 +41,8 @@ jobs:
       shell: cmd
       run: |
         if not exist vcpkg git clone https://github.com/Microsoft/vcpkg.git vcpkg
-        if exist vcpkg\bootstrap-vcpkg.bat call vcpkg\bootstrap-vcpkg.bat
+        cd vcpkg && git fetch --unshallow || git fetch
+        cd vcpkg && bootstrap-vcpkg.bat
 
     - name: Install Dependencies via vcpkg.json
       run: |
