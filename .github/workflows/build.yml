@@ -46,9 +46,10 @@ jobs:
         bootstrap-vcpkg.bat
 
     - name: Install Dependencies via vcpkg.json
-      shell: cmd
       run: |
-        vcpkg\vcpkg install --triplet x64-windows --x-manifest-root=%GITHUB_WORKSPACE% --x-install-root=%GITHUB_WORKSPACE%\vcpkg_installed --overlay-ports=%GITHUB_WORKSPACE%
+        cd ${{ github.workspace }}
+        & "${{ env.VCPKG_ROOT }}\vcpkg.exe" install --triplet=x64-windows --x-manifest-root=. --no-registry-baseline
+      shell: powershell
         
     - name: Configure CMake
       run: |
