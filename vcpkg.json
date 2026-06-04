@@ -1,0 +1,18 @@
+{
+  "dependencies": [
+    "boost:x64-windows",
+    "luajit:x64-windows",
+    "pugixml:x64-windows",
+    "gmp:x64-windows",
+    "libmariadb:x64-windows",
+    "cryptopp:x64-windows",
+    "fmt:x64-windows"
+  ],
+  "builtin-baseline": "2024-02-14",
+  "overrides": [
+    {
+      "name": "boost",
+      "version": "1.82.0"
+    }
+  ]
+}
