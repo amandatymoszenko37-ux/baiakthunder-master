@@ -8,6 +8,7 @@
     "cryptopp",
     "fmt"
   ],
+  "builtin-baseline": "383b708601837599723ec083bdaea540bc2b1442",
   "overrides": [
     {
       "name": "fmt",
